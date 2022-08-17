@@ -1,0 +1,20 @@
+                     New Features
+
+1. Modifications in ui.
+2. color changes in Select and movement of objects.
+3. Added shortcuts Delete -> Delete , escape -> unselect.
+4. added z-index chnge move front and move back.
+5. Added basic font toogles B,I,Bi,N
+6. Change in Download option now one can preview the photo before download.
+7. Option of Save image name and type (.png/.jpg).
+8. popup menu navigation for About, Team, help, versions.
+9. Added Versions log.
+10.Added New Option Style on text.
+11.New way of text Editing.
+12.Added a new option objets on canvas which provied the interaction with canvas objects.
+
+                     Bugs
+
+1. Removed bug of Reselection and resolution.
+2. Removed bug of object vanishing.
+3. Removed bug of select deselect

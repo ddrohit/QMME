@@ -1,0 +1,236 @@
+body{
+  margin:0px;
+  overflow: hidden;
+}
+
+#navbar{
+	background-color: #343a40;
+	color:white;
+	padding: 10px;
+}
+
+#navbar .logo{
+	font-size: 25px;
+	margin-left: 5px;
+}
+
+#MainCanvas{
+  border: solid #343a40 2px;
+}
+
+.icon{
+	width:22px;
+	border-radius: 20%;
+	padding:5px;
+	margin-left: 10px;
+	background-color: #343a40de;
+  margin-top: 10px;
+  cursor: pointer;
+  margin:5px;
+}
+.icon:hover{
+  background-color: #343a40;
+  padding:7px;
+  margin: 3px;
+}
+#topmenu{
+  position:absolute;
+  left:10px;
+	z-index:1000;
+}
+#hiddenarea{
+	display:none;
+}
+
+#sidebar{
+	position: absolute;
+	right:20px;
+	top:18%;
+	z-index: 10000;
+}
+
+
+.sideicon > img ,.sideicon > a > img, .sideicon > label > img{
+	width:20px;
+	padding: 15px;
+	margin-bottom: 15px;
+	background-color: #343a40;
+	border-radius: 50%;
+	border-color: white;
+  opacity: 0.9;
+  cursor: pointer;
+}
+
+/*------------------------------- Slider ---------------------------------*/
+
+.slider {
+  -webkit-appearance: none;
+  margin-top: 110px;
+  height: 15px;
+  width: 250px;
+  right:-100px;
+  position: absolute;
+  border-radius: 5px;
+  background: #d3d3d3;
+  outline: none;
+  opacity: 0.7;
+  transform: rotate(270deg);
+}
+
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 15px;
+  height: 16px;
+  border: 0;
+  background: url('../img/contrasticon.png');
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 15px;
+  height: 16px;
+  border: 0;
+  background: url('../img/contrasticon.png');
+  cursor: pointer;
+}
+
+/*------------------------------------------------------------------------*/
+
+
+.box {
+  width: 40%;
+  margin: 0 auto;
+  background: rgba(255,255,255,0.2);
+  padding: 35px;
+  border: 2px solid #fff;
+  border-radius: 20px/50px;
+  background-clip: padding-box;
+  text-align: center;
+}
+
+.button {
+  font-size: 12px;
+  color: white;
+  text-decoration: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease-out;
+  border:solid 1.2px white;
+  float: right;
+  width: 8px;
+  height: 8px;
+  padding: 10px 10px 12px 12px;
+}
+
+.button:hover {
+  background: #343a40;
+}
+
+.overlay {
+  z-index: 100000;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(0, 0, 0, 0.7);
+  visibility: hidden;
+  opacity: 0;
+}
+.overlay:target {
+  visibility: visible;
+  opacity: 1;
+}
+
+.popup,.popupAbout {
+  margin: 70px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 5px;
+  width: 40%;
+  height:80%;
+  position: relative;
+}
+#previewcontainer{
+  width: 100%;
+  height: 50%;
+}
+.popup h2 {
+  margin-top: 0;
+  color: #333;
+  font-family: Tahoma, Arial, sans-serif;
+}
+.popup .close {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  transition: all 100ms;
+  font-size: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  color: #333;
+}
+.popup .close:hover {
+  color: #343a40;
+}
+.content {
+  height: 90%;
+  overflow: scroll;
+}
+
+.content > div,.content > a > div{
+	text-align: center;
+	padding: 20px;
+	margin: 5px;
+	background-color: #80808029;
+}
+
+.content > a > div:hover{
+	background-color: #06D85F;
+}
+.content > a{
+	text-decoration: none;
+	color: #333;
+}
+
+@media screen and (max-width: 700px){
+  .box{
+    width: 70%;
+    height: 100%;
+  }
+  .popup{
+    width: 70%;
+    height: 70%;
+  }
+}
+
+.content::-webkit-scrollbar { width: 0 !important }
+.content{ overflow: -moz-scrollbars-none; }
+.content { -ms-overflow-style: none; }
+
+.tooltip{
+  margin: 5px;
+  padding:8px;
+  border-radius: 10px;
+  color:white;
+  background-color: #343a40;
+}
+
+#loadedimagepreview{
+ height: 80%;
+ margin: 10px;
+}
+
+.qmebutton{
+  padding:10px;
+  background-color: #343a40;
+  color:white;
+  border:none;
+  border-radius: 10px;
+}

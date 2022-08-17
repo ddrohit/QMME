@@ -1,0 +1,3 @@
+https://labs.abeautifulsite.net/jquery-minicolors/
+
+ondoubleclick show the text edit option with all fonts u want to support and want to integrate

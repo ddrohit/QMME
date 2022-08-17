@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Quick MultiMedia Editor</title>
+	<!--
+	<script type="text/javascript" src="//deloplen.com/apu.php?zoneid=2644869" async data-cfasync="false"></script>
+	<meta name="propeller" content="ea117d58839fd016c13a7f56ebc7df45">-->
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="HandheldFriendly" content="true">
+	<link rel="stylesheet" type="text/css" href="css/index.css">
+	<link rel="manifest" href="webapp/manifest.json">
+	<link href="https://fonts.googleapis.com/css?family=Abel|Abril+Fatface|Acme|Alegreya|Alegreya+Sans|Anton|Archivo|Archivo+Black|Archivo+Narrow|Arimo|Arvo|Asap|Asap+Condensed|Bitter|Bowlby+One+SC|Bree+Serif|Cabin|Cairo|Catamaran|Crete+Round|Crimson+Text|Cuprum|Dancing+Script|Dosis|Droid+Sans|Droid+Serif|EB+Garamond|Exo|Exo+2|Faustina|Fira+Sans|Fjalla+One|Francois+One|Gloria+Hallelujah|Hind|Inconsolata|Indie+Flower|Josefin+Sans|Julee|Karla|Lato|Libre+Baskerville|Libre+Franklin|Lobster|Lora|Mada|Manuale|Maven+Pro|Merriweather|Merriweather+Sans|Montserrat|Montserrat+Subrayada|Mukta+Vaani|Muli|Noto+Sans|Noto+Serif|Nunito|Open+Sans|Open+Sans+Condensed:300|Oswald|Oxygen|PT+Sans|PT+Sans+Caption|PT+Sans+Narrow|PT+Serif|Pacifico|Passion+One|Pathway+Gothic+One|Play|Playfair+Display|Poppins|Questrial|Quicksand|Raleway|Roboto|Roboto+Condensed|Roboto+Mono|Roboto+Slab|Ropa+Sans|Rubik|Saira|Saira+Condensed|Saira+Extra+Condensed|Saira+Semi+Condensed|Sedgwick+Ave|Sedgwick+Ave+Display|Shadows+Into+Light|Signika|Slabo+27px|Source+Code+Pro|Source+Sans+Pro|Spectral|Titillium+Web|Ubuntu|Ubuntu+Condensed|Varela+Round|Vollkorn|Work+Sans|Yanone+Kaffeesatz|Zilla+Slab|Zilla+Slab+Highlight" rel="stylesheet">
+	<script src="js/Algorithms.js"></script>
+	<meta name="theme-color" content="#343a40">
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	  <script src="lib/minicolors.js"></script>
+  	<link rel="stylesheet" href="lib/jquery.minicolors.css">
+	
+	<script>
+	 if ('serviceWorker' in navigator) {
+	    console.log("Will the service worker register?");
+	    navigator.serviceWorker.register('webapp/serviceworker.js')
+	      .then(function(reg){
+	        console.log("Yes, it did.");
+	     }).catch(function(err) {
+	        console.log("No it didn't. This happened:", err)
+	    });
+	 }
+</script>
+</head>
+<body>
+	<nav id="navbar">
+		<div class="logo">
+			<i>QMME</i>
+				<a class="button Add-Tooltip" tooltip-data="Help" href="#popup1">?</a>
+		</div>
+	</nav>
+	<div id="topmenu">
+		<div id="topmainmenu">
+			<a href="#" onclick="ToogleSlide('topmainmenu','topsubmenu')"><img class="icon Add-Tooltip" tooltip-data="Add a image" off-set-y="45" src="img/addimage.png"></img></a>
+			<img class="icon Add-Tooltip" tooltip-data="Add a text" off-set-y="45" onclick="AddText()" src="img/addText.png"/>
+			<a href="#popupSave" style="text-decoration: none">
+				<img class="icon Add-Tooltip" tooltip-data="Save image as" off-set-y="45" onclick="preview()" src="img/downloadimage.png"/>
+			</a>
+			<img class="icon Add-Tooltip" tooltip-data="Toggle Fullscreen" off-set-y="45" onclick="togglefullscreen()" src="img/fullscreen.png"></img>
+			<img class="icon Add-Tooltip" tooltip-data="Take object forward" off-set-y="45" onclick="changeindex('front')" src="img/indexfrontimage.png"></img>
+			<img class="icon Add-Tooltip" tooltip-data="Take object backward" off-set-y="45" onclick="changeindex('back')" src="img/indexbackimage.png"></img>
+			<a href="#popupAllobjs" style="text-decoration: none">
+				<img class="icon Add-Tooltip" tooltip-data="See all objects" off-set-y="45" onclick="showallobjs()" src="img/objectsimage.png"/>
+			</a>
+			<input style="display:none" oninput="Loadimage(this);" accept=".png,.jpg,.jpeg,.gif,.tiff,.bmp" type="file" name="photo" id="upload-photo" />
+		</div>
+		<div id="topsubmenu" style="display:none;">
+			<label for="upload-photo">
+				<img class="icon Add-Tooltip" tooltip-data="Upload from local" off-set-y="45" src="img/folder.png"></img>
+			</label>
+			<a href="#popAddimage"><img class="icon Add-Tooltip" tooltip-data="Add image through link" off-set-y="45" src="img/link.png"></img></a>
+			<a href="#" onclick="ToogleSlide('topsubmenu','topmainmenu')"><img class="icon Add-Tooltip" tooltip-data="Go back" off-set-y="45" onclick="changeindex('back')" src="img/backimage.png"></img></a>
+		</div>
+	</div>
+	<input style="display:none" oninput="changecolor(this.value)" type="color" id="color-change" />
+	<input style="display:none" oninput="bgchangecolor(this.value)" type="color" id="bg-color-change" />
+	<div id="sidebar" style="display:none;">
+		<div id="sidebar1">
+			<div class="sideicon">
+				 <a href="#popupTextEditor" onclick="initilizetexteditor(this.value)">
+				 	<img src="img/editimage.png"/>
+				 </a>
+			</div>
+			<div class="sideicon" onclick="ToggelFontSizer()"><img src="img/fontsizeimage.png"></div>
+			<div class="sideicon"><img id="nbi" onclick="changenbistyle(this)" src="img/normalimage.png"></div>
+			<div class="sideicon"><img onclick="ToogleSlide('sidebar1','sidebar3')" src="img/strokeimage.png"></div>
+			<div class="sideicon"><img onclick="canvas.remove(canvas.getActiveObject());" src="img/deleteimage.png"></div>
+			<div class="sideicon"><img onclick="canvas.discardActiveObject().requestRenderAll();" src="img/closeimage.png"></div>
+		</div>
+		<div id="sidebar2" style="display:none;">
+			  <input id="fontslider" type="range" min="10" max="200" value="50" oninput="ChangeFontSize(this.value)" class="slider"><br>
+			  <div style="margin-top: 85px;margin-left:25px;" id="sidefontvalue" oninput="ChangeFontSize(this.innerHTML)" contenteditable="true"> - </div>
+			  <div class="sideicon" style="margin-top:150px;margin-left:40px "><img onclick="ToggelFontSizer()" src="img/backimage.png"></div>
+		</div>
+		<div id="sidebar3" style="display: none">
+			<div class="sideicon"><label for="color-change"><img src="img/colorimage.png"></img></label></div>
+			<div class="sideicon"><label for="bg-color-change"><img src="img/bgimage.png"/></label></div>
+			<div class="sideicon"><a href="#FontFamilySelector"><img src="img/fontimage.png"/></a></div>
+			<div class="sideicon"><img onclick="ToogleSlide('sidebar3','sidebar1')" src="img/backimage.png"></div>
+		</div>
+		<div id="sidebar4"  style="display: none">
+			<div class="sideicon"><img onclick="canvas.remove(canvas.getActiveObject());" src="img/deleteimage.png"></div>
+			<div class="sideicon"><img onclick="lockx(canvas.getActiveObject());" src="img/lockx.png"></div>
+			<div class="sideicon"><img onclick="unlockx(canvas.getActiveObject());" src="img/unlockx.png"></div>
+			<div class="sideicon"><img onclick="locky(canvas.getActiveObject());" src="img/locky.png"></div>
+			<div class="sideicon"><img onclick="unlocky(canvas.getActiveObject());" src="img/unlocky.png"></div>
+			<div class="sideicon"><img onclick="canvas.discardActiveObject().requestRenderAll();" src="img/closeimage.png"></div>
+		</div>
+	</div>
+		<canvas id="MainCanvas">
+		</canvas>
+	<div id="hiddenarea"></div>
+	
+<div id="popup1" class="overlay">
+	<div class="popup">
+		<i><center><h2>QMME</h2></center></i>
+		<a class="close" href="#Maincanvas">&times;</a>
+		<div class="content">
+			<a href="#popupAbout">
+				<div>
+					ABOUT
+				</div>
+			</a>
+			<a href="#popupContact">
+				<div>
+					CONTACT
+				</div>
+			</a>
+			<a href="#popupTeam">
+				<div>
+					TEAM
+				</div>
+			</a>
+			<a href="#popupVersions">
+				<div>
+					VERSIONS
+				</div>
+			</a>
+			<a href="#Maincanvas">
+				<div>
+					EXIT
+				</div>
+			</a>
+			<p style="float:right;padding-top:5px;font-size: 15px;">- version: 0.03<br>&emsp;(Mercury)</p>
+		</div>
+	</div>
+</div>
+
+<div id="popupAbout" class="overlay">
+	<div class="popup">
+		<center><h2>About</h2></center>
+		<a class="close" href="#Maincanvas">&times;</a>
+		<div class="content" style="font-family: 'Arial, Helvetica, sans-serif';text-align: justify;">
+			<p>
+				QMME stands for Quick MultiMedia Editor. It is a OpenSource project for Quick Multimedia 
+				Editing over Standard Web Interface using JS 8, HTML 5, CSS 5. Over a powerful Librarys
+				(Fabric.js, Ccapture.js).
+				<br><br>
+				It Mainly concerns to MEME Editing and Creation over Mobile and Desktop.
+				<br><br>
+				Developers of this app continuesloy work on Editing Major Multimedia Streams
+				such as Pictures,  Videos, Gif files.
+				<br><br>
+			</p>
+			<a href="#popup1">
+				<div>
+					BACK
+				</div>
+			</a>
+			<p style="float:right;padding-top:5px;font-size: 15px;">- version: 0.03<br>&emsp;(Mercury)</p>
+		</div>
+	</div>
+</div>
+
+<div id="popupContact" class="overlay">
+	<div class="popup">
+		<u><center><h2>HELP/CONTACT</h2></center></u>
+		<a class="close" href="#Maincanvas">&times;</a>
+		<div class="content" style="font-family: 'Arial, Helvetica, sans-serif';text-align: justify;">
+			<p style="text-align: center">
+				<b>Contact Gmail</b><br><br>
+				dasamantharao.rohit@gmail.com<br><br>
+				<b>Contact Number</b><br><br>
+				+91-9989086895
+			</p>
+			<a href="#popup1">
+				<div>
+					BACK
+				</div>
+			</a>
+			<p style="float:right;padding-top:5px;font-size: 15px;">- version: 0.03<br>&emsp;(Mercury)</p>
+		</div>
+	</div>
+</div>
+
+<div id="popAddimage" class="overlay">
+		<div class="popup">
+			<u><center><h2>Add image</h2></center></u>
+			<a class="close" href="#Maincanvas">&times;</a>
+			<div class="content" style="font-family: 'Arial, Helvetica, sans-serif';text-align: justify;">
+				<center>
+					<input type="text" id="imageurl" style="padding:5px;border-radius: 5px;box-shadow: none;" placeholder="Enter Image Url"/>
+					<button style="border-radius: 5px;padding:5px; margin-left:10px;" onclick="checkimage()">Verify</button>
+					<div id="loadedimagepreview" style="overflow: scroll;">
+
+					</div>
+					<div id="loadurlimage"></div>
+				</center>
+			</div>
+		</div>
+	</div>
+
+<div id="popupTeam" class="overlay">
+	<div class="popup">
+		<center><h2>TEAM</h2></center>
+		<a class="close" href="#Maincanvas">&times;</a>
+		<div>
+		<div class="content" style="font-family: 'Arial, Helvetica, sans-serif';text-align: center">
+			<div>
+				<img src="img/rohitimage.png" style="border-radius: 50%;"
+					width=100 height=100><br>
+
+				<b><span style="padding:10px;">Rohit Dasamantharao</span><br></b>
+				<b><i><span style="padding: 10px;">Software Engineer</span></i></b>
+			</div>
+			<div>
+				<img src="img/ushaimage.png" style="border-radius: 50%;"
+				width=100 height=100><br>
+				<b><span style="padding:10px;">Usha Esaparu</span><br></b>
+				<b><i><span style="padding: 10px;">Q.A Engineer</span></i></b>
+			</div>
+			<p style="float:right;padding-top:5px;font-size: 15px;">- version: 0.03<br>&emsp;(Mercury)</p>
+		</div>
+	</div>
+	</div>
+</div>
+
+<div id="popupVersions" class="overlay">
+	<div class="popup">
+		<u><center><h2>Versions</h2></center></u>
+		<a class="close" href="#Maincanvas">&times;</a>
+		<div class="content" style="font-family: 'Arial, Helvetica, sans-serif';text-align: center;">
+			<p style="text-align: center">
+					<li>
+						<a target="blank" href="document/0.01.txt">Version 0.01 (Mercury) 22-05-2019</a>
+					</li><br>
+					<li>
+						<a target="blank" href="document/0.02.txt">Version 0.02 (Mercury) 28-05-2019 </a>
+					</li><br>
+					<li>
+						<a target="blank" href="document/0.03.txt">Version 0.02 (Mercury) 09-09-2019 </a>
+					</li><br>
+			</p>
+			<a href="#popup1">
+				<div>
+					BACK
+				</div>
+			</a>
+			<p style="float:right;padding-top:5px;font-size: 15px;">- version: 0.03<br>&emsp;(Mercury)</p>
+		</div>
+	</div>
+</div>
+
+<div id="popupSave" class="overlay">
+	<div class="popup">
+		<center><u><h2> Save Image </h2></u></center>
+		<a class="close" href="#Maincanvas">&times;</a>
+		<div class="content" style="font-family: 'Arial, Helvetica, sans-serif';text-align: center;">
+			<div id="previewcontainer" style="background-color: white;">
+				<img id="preview" style="border:solid 1px;"></img><br><br>
+			</div>
+			<span id="dimenssions"></span><br>
+			<center>
+				<table>
+				<tr>
+					<td>
+						FileName
+					</td>
+					<td>
+						<input type="text" id="downloadname" name="">
+					</td>
+				<tr>
+				<td>
+					FormatName
+				</td>
+				<td>
+					<select id="ext">
+					<option value=".png">.PNG</option>
+					<option value=".jpg">.JPG/JPEG</option>
+					</select><br>
+				</td>
+				</tr>
+				</table>
+			</center>
+			<center><button class="qmebutton" onclick="download()">Download</button></center>
+			<p style="float:right;padding-top:5px;font-size: 15px;">- version: 0.03<br>&emsp;(Mercury)</p>
+		</div>
+	</div>
+</div>
+
+<div id="popupAllobjs" class="overlay">
+	<div class="popup">
+		<center><i><h2>Objects</h2></i></center>
+		<a class="close" href="#Maincanvas">&times;</a>
+		<div id="objscontainer" class="content" style="font-family: 'Arial, Helvetica, sans-serif';text-align: center;overflow-y: scroll;height: 60vh;">
+		</div>
+	</div>
+</div>
+
+<div id="FontFamilySelector" class="overlay">
+		<div class="popup">
+			<center><i><h2>FontFamily</h2></i></center>
+			<a class="close" href="#Maincanvas">&times;</a>
+			<div id="FontContainer" class="content" style="font-family: 'Arial, Helvetica, sans-serif';text-align: center;overflow-y: scroll;height: 60vh;">
+				<br>
+				<h3>Font-Type</h3>
+				<select id="fonts-available" onchange="changefontfamily(this.value)" style="padding:10px;border-radius: 10px;">
+					
+				</select><br><br><br>
+				<h3>Preview</h3>
+			<span id="FontFamily-Preview" style="font-size:2em !important;">
+				Qmme FontStyle
+			</span>
+			<br><br><br>
+			<a href="#MainCanvas"><button class="qmebutton">Done</button></a>
+		</div>
+	</div>
+</div>
+<div id="popupTextEditor" class="overlay">
+	<div class="popup">
+		<center><i><h2>TEXT EDITOR</h2></i></center>
+		<a class="close" href="#Maincanvas">&times;</a>
+		<div class="content" style="font-family: 'Arial, Helvetica, sans-serif';text-align: center;">
+			<input id="texteditortext" onkeyup="updatetext(this.value)" type="text" name=""/>
+			<a href="#MainCanvas"><button>Ok</button></a>
+			<p style="float:right;padding-top:5px;font-size: 15px;">- version: 0.03<br>&emsp;(Mercury)</p>
+		</div>
+	</div>
+</div>
+<script type="text/javascript" src="lib/fabric.js"></script>
+<script type="text/javascript" src="js/shortcuts.js"></script>
+<script src="js/tootip.js"></script>
+<script src="lib/fontfaceobserver.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
+<script>document.getElementById("fonts-available").innerHTML=fontoptions;</script>
+</body>
+</html>

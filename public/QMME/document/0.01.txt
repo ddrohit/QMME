@@ -1,0 +1,10 @@
+1. Ui Changes.
+2. Basic Text and Image Addition.
+3. Basic Text Style Featurs.
+   1. Color.
+   2. Text Edit.
+   3. Font Size.
+   4. Delet option.
+   5. Deselect option.
+4. Basic Movements and Dowload option.
+5. FullScreen option.
