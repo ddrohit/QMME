@@ -1,10 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
 	<title>Quick MultiMedia Editor</title>
-	<!--
-	<script type="text/javascript" src="//deloplen.com/apu.php?zoneid=2644869" async data-cfasync="false"></script>
-	<meta name="propeller" content="ea117d58839fd016c13a7f56ebc7df45">-->
 	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	<meta name="HandheldFriendly" content="true">
@@ -33,7 +30,7 @@
 <body>
 	<nav id="navbar">
 		<div class="logo">
-			<i>QMME</i>
+			<em>QMME</em>
 				<a class="button Add-Tooltip" tooltip-data="Help" href="#popup1">?</a>
 		</div>
 	</nav>
@@ -101,7 +98,7 @@
 	
 <div id="popup1" class="overlay">
 	<div class="popup">
-		<i><center><h2>QMME</h2></center></i>
+		<em><h2>QMME</h2></em>
 		<a class="close" href="#Maincanvas">&times;</a>
 		<div class="content">
 			<a href="#popupAbout">
@@ -136,7 +133,7 @@
 
 <div id="popupAbout" class="overlay">
 	<div class="popup">
-		<center><h2>About</h2></center>
+		<h2>About</h2>
 		<a class="close" href="#Maincanvas">&times;</a>
 		<div class="content" style="font-family: 'Arial, Helvetica, sans-serif';text-align: justify;">
 			<p>
@@ -162,7 +159,7 @@
 
 <div id="popupContact" class="overlay">
 	<div class="popup">
-		<u><center><h2>HELP/CONTACT</h2></center></u>
+		<u><h2>HELP/CONTACT</h2></u>
 		<a class="close" href="#Maincanvas">&times;</a>
 		<div class="content" style="font-family: 'Arial, Helvetica, sans-serif';text-align: justify;">
 			<p style="text-align: center">
@@ -183,24 +180,22 @@
 
 <div id="popAddimage" class="overlay">
 		<div class="popup">
-			<u><center><h2>Add image</h2></center></u>
+			<u><h2>Add image</h2></u>
 			<a class="close" href="#Maincanvas">&times;</a>
 			<div class="content" style="font-family: 'Arial, Helvetica, sans-serif';text-align: justify;">
-				<center>
 					<input type="text" id="imageurl" style="padding:5px;border-radius: 5px;box-shadow: none;" placeholder="Enter Image Url"/>
 					<button style="border-radius: 5px;padding:5px; margin-left:10px;" onclick="checkimage()">Verify</button>
 					<div id="loadedimagepreview" style="overflow: scroll;">
 
 					</div>
 					<div id="loadurlimage"></div>
-				</center>
 			</div>
 		</div>
 	</div>
 
 <div id="popupTeam" class="overlay">
 	<div class="popup">
-		<center><h2>TEAM</h2></center>
+		<h2>TEAM</h2>
 		<a class="close" href="#Maincanvas">&times;</a>
 		<div>
 		<div class="content" style="font-family: 'Arial, Helvetica, sans-serif';text-align: center">
@@ -225,7 +220,7 @@
 
 <div id="popupVersions" class="overlay">
 	<div class="popup">
-		<u><center><h2>Versions</h2></center></u>
+		<u><h2>Versions</h2></u>
 		<a class="close" href="#Maincanvas">&times;</a>
 		<div class="content" style="font-family: 'Arial, Helvetica, sans-serif';text-align: center;">
 			<p style="text-align: center">
@@ -251,15 +246,20 @@
 
 <div id="popupSave" class="overlay">
 	<div class="popup">
-		<center><u><h2> Save Image </h2></u></center>
+		<u><h2> Save Image </h2></u>
 		<a class="close" href="#Maincanvas">&times;</a>
 		<div class="content" style="font-family: 'Arial, Helvetica, sans-serif';text-align: center;">
 			<div id="previewcontainer" style="background-color: white;">
 				<img id="preview" style="border:solid 1px;"></img><br><br>
+				<button id="waButton">Share</button>
 			</div>
 			<span id="dimenssions"></span><br>
-			<center>
-				<table>
+			<table>
+				<caption></caption>
+				<tr>
+					<th>filename</th>
+					<th>Format</th>
+				</tr>
 				<tr>
 					<td>
 						FileName
@@ -278,9 +278,8 @@
 					</select><br>
 				</td>
 				</tr>
-				</table>
-			</center>
-			<center><button class="qmebutton" onclick="download()">Download</button></center>
+			</table>
+			<button class="qmebutton" onclick="download()">Download</button>
 			<p style="float:right;padding-top:5px;font-size: 15px;">- version: 0.03<br>&emsp;(Mercury)</p>
 		</div>
 	</div>
@@ -288,7 +287,7 @@
 
 <div id="popupAllobjs" class="overlay">
 	<div class="popup">
-		<center><i><h2>Objects</h2></i></center>
+		<em><h2>Objects</h2></em>
 		<a class="close" href="#Maincanvas">&times;</a>
 		<div id="objscontainer" class="content" style="font-family: 'Arial, Helvetica, sans-serif';text-align: center;overflow-y: scroll;height: 60vh;">
 		</div>
@@ -297,7 +296,7 @@
 
 <div id="FontFamilySelector" class="overlay">
 		<div class="popup">
-			<center><i><h2>FontFamily</h2></i></center>
+			<em><h2>FontFamily</h2></em>
 			<a class="close" href="#Maincanvas">&times;</a>
 			<div id="FontContainer" class="content" style="font-family: 'Arial, Helvetica, sans-serif';text-align: center;overflow-y: scroll;height: 60vh;">
 				<br>
@@ -316,7 +315,7 @@
 </div>
 <div id="popupTextEditor" class="overlay">
 	<div class="popup">
-		<center><i><h2>TEXT EDITOR</h2></i></center>
+		<em><h2>TEXT EDITOR</h2></em>
 		<a class="close" href="#Maincanvas">&times;</a>
 		<div class="content" style="font-family: 'Arial, Helvetica, sans-serif';text-align: center;">
 			<input id="texteditortext" onkeyup="updatetext(this.value)" type="text" name=""/>

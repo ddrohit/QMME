@@ -1,6 +1,6 @@
 document.onkeydown =function(evt) {
     evt = evt || window.event;
-    var charCode = evt.keyCode || evt.which;
+    let charCode = evt.keyCode || evt.which;
     //for delete key
     if(charCode==46)
     {

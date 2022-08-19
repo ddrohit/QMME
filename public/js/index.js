@@ -451,3 +451,13 @@ function unlocky(obj){
 }
 
 image =[];
+
+const button = document.getElementById('waButton');
+
+
+// let sharehref = `whatsapp://send?text=${encodeURIComponent(imageSrc)}`;
+button.addEventListener('click',()=>{
+	let image = document.getElementById('preview');
+	let imageURL = image.src;
+	button.setAttribute('href', 'whatsapp://send?text='+encodeURIComponent(imageURL));
+})

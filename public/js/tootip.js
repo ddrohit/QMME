@@ -1,7 +1,14 @@
-var tools = document.getElementsByClassName("Add-Tooltip")
+let tools = document.getElementsByClassName("Add-Tooltip")
 
-for(var i = 0 ; i < tools.length ; i++){
+const removealltooltips = ()=>{
+    let alltooltips = document.getElementsByClassName("tooltip")
+    for(let tooltip of alltooltips)
+        tooltip.remove();
+}
+
+for(let tool of tools){
     let showtooltip = function(e){
+        removealltooltips();
         let Data = e.target.getAttribute("tooltip-data"),
             posy = e.target.offsetTop,
             posx = e.target.offsetLeft,
@@ -9,23 +16,23 @@ for(var i = 0 ; i < tools.length ; i++){
             offsety = parseInt(e.target.getAttribute("off-set-y"));
             if( offsetx+"" == "NaN" ) offsetx = 0;
             if( offsety+"" == "NaN" ) offsety = 0;
-            //console.log("got offset as"+offsetx);
-            var tiptext=document.createElement("span");
+            let tiptext=document.createElement("span");
             tiptext.textContent = Data;
             tiptext.style.position="absolute";
             tiptext.style.left=posx+offsetx-10+"px";
             tiptext.style.top=posy+offsety+35+"px";
             tiptext.classList.add("tooltip");
             document.body.appendChild(tiptext);
+            setTimeout(() => {
+                hidetooltip();
+            }, 1000);
     }
-    let hidetooltip = function(e){
-        console.log(e.target.getAttribute("tooltip"));
-        document.getElementsByClassName("tooltip")[0].remove();
+    let hidetooltip = function(){
+        const alltooltips = document.getElementsByClassName("tooltip");
+        if(alltooltips.length > 0)
+            alltooltips[0].remove();
     }
-    tools[i].addEventListener(
+    tool.addEventListener(
         "mouseenter" , showtooltip
-    );
-    tools[i].addEventListener(
-        "mouseleave" , hidetooltip
     );
 }

@@ -1,6 +1,7 @@
 body{
   margin:0px;
   overflow: hidden;
+  background-image: url('/img/Transparency.png');
 }
 
 #navbar{
